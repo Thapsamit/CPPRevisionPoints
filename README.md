@@ -36,3 +36,4 @@ Day  1 Principles of Object Oriented programming
  - ### Dynamic Binding - Binding refers to the linking of procedure call to the code to be executed in reponse to the call. Dynamic binding means that code associated with a given procedure call is not known untill the time of the call at run time. It is associated to polymorphishm and inheritance.
  - ### Message Passing - Objects communicate with one other by sending and receiving info.It specifies the name of object and name of function and information(arguments) to be sent.
  
+ - Object based programming supports encapsulation and object identity(ex ada) while oops has inheritance + dynamic binding as well(ex C++)
