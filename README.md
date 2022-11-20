@@ -58,5 +58,19 @@ Day  1 Principles of Object Oriented programming
 
 ### Chapter 3 (Tokens, Expressions, and control structures)
 
+- Identfier can't start with digit, can't use keyword.
+- C has limit of 32 characters in name while c++ has no limit
+- c++ has 95 keywords.
+- in c++ int = 2 bytes long int = 4 bytes float = 4 bytes and double = 8 bytes
+- void pointer or generic pointer has no associated data type instead it can point to any basic type but can't be derefrenced. and need type casting as well
+  - *ip  = *gp if gp is void bcz it doesn't make sense to dereference a void pointer
+  - C++ doesn't allow arithmetic operators.
+  - malloc and calloc returns void pointer.
+- Enumerated data type assigns name to numbers, thereby increasing comprehensibility of the code. for example it automatically enumerates a list of words by assigning them values 0,1,2 etc
+  - enum shape {circle,square}; shape ellipse; shape back = 7 // Not allowed.
+- In c++, character array length must be one larger than total characters. 
+- char * const ptr1 = "Good"; constant pointer;  the pointer points to a fixed memory location, and the value at that location can be changed because it is a variable, but the pointer will always point to the same location because it is made constant here.
+- int const * ptr2 = &m; pointer to constant . It can points to any variable of correct type but contents of what it points to cannot be changed
+- const char * const ptr3 = "cy" constant pointer to constants In the constant pointers to constants, the data pointed to by the pointer is constant and cannot be changed. The pointer itself is constant and cannot change and point somewhere else.
 
  
