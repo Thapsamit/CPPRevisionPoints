@@ -73,4 +73,87 @@ Day  1 Principles of Object Oriented programming
 - int const * ptr2 = &m; pointer to constant . It can points to any variable of correct type but contents of what it points to cannot be changed
 - const char * const ptr3 = "cy" constant pointer to constants In the constant pointers to constants, the data pointed to by the pointer is constant and cannot be changed. The pointer itself is constant and cannot change and point somewhere else.
 
+- reference variable is like an alias to previously defined variable like, must be initialized, its application is passing arguments to functions
+```
+int sum = 5;
+int &s = sum;
+```
+```
+int x;
+int *p = &x;
+int &m = *p; 
+int &k = 7 // allowed
+```
+
+- Scope Resolution operator:-
+  - scope is the area of the program upto which a variable is accessible, c++ is block scoped
+  - c++ provides SRO that is an operator that allows to access the global version of  a variable
+  - It Allows us to access the global version of a variable.
+  - Major application of SRO is to identify the class to which a member function belongs to.
+  
+- Member dereferncing operator:-
+  - permits to access class members through pointers
+  ```
+  ::* - pointer to member of a class
+  * - access member using object name and a pointer to that member
+  ->* - access member using a pointer to object and a pointer to that member.
+  ```
+  - malloc() and calloc() for memory allocation while new and delete are operator for memory allocation
+  
+  ```
+  int *p = new int(5);
+  int *ar = new int[10];
+  ```
+  
+  
+  ```
+  array_ptr = new int[3][5][4]; // illegal first one can be constant or variable but other need to constant
+  array_ptr = new int[][3][6] // illegal
+  delete [size] pointer_var // for deleting array of given size
+  delete [] arrayP // delete complete array pointer
+  
+  ```
+  
+  - Advantages of new operator:-
+   - automaticaly computes size of given data type
+   - automatically returns coorect pointer no need for type cast whereas malloc return void pointer 
+   - can do initialization
+   - can be overloaded 
+  - malloc() vs calloc():-
+    - **malloc()** :- 
+      - malloc() doesn’t initialize the allocated memory. If you try to read from the allocated memory without first initializing it, then you will invoke undefined behavior, which will usually mean the values you read will be garbage.
+      - takes single arguments i.e, number of bytes to be allocated like 5*sizeof(int);
+      - faster
+      - It is used to indicate memory allocation
+    - **calloc()** :- 
+      - calloc() allocates the memory and also initializes every byte in the allocated memory to 0. If you try to read the value of the allocated memory without initializing it, you’ll get 0 as it has already been initialized to 0 by calloc().
+      - takes two args (no of blocks required, size of each block) example calloc(5,sizeof(int));
+      - slower
+      - It is used to indicate contiguous memory allcoation
+
+    - endl vs \n 
+     - cout << endl inserts a new line and flushes the stream(output buffer), whereas cout << “\n” just inserts a new line.
+     - endl is manipulator and \n is character.
+     
+
+### Chapter 4 - Functions in c++
+- The prototype describes the function interface basically the return type,arguments,and function name but not the definition
+- a template is also used to ensure that proper arguments passed and return value is treated correctly.
+- In c empty parenthesis defines any number of arguments but in c++ it means empty arguments list
+- In c++ it can have open parameter list using ellipses int functionname(...);
+- In c++ we can use call by reference using & but in c it is applied using pointers and indirection.
+- inline function is a function that expanded in line when it is invoked.
+- In the case of inline, the arguments are evaluated only once.Whereas in the case of macro, the arguments are evaluated every time whenever macro is used in the program.
+- macros do not have error checking while inline have error checking.
+** Function Overloading resolution :-**
+   - tries to find exact match.
+   - If not found it uses integral promotion to actual args like float to double and char to int
+   - when both fails it uses implicit conversion but if multplie matches arises then it gives an error messages
+   - If all fails compiler will try the user defined conversions.
  
+### Chapter 5 Classes and Objects 
+
+
+
+
+
