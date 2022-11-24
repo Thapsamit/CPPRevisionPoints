@@ -143,17 +143,148 @@ int &k = 7 // allowed
 - In c++ it can have open parameter list using ellipses int functionname(...);
 - In c++ we can use call by reference using & but in c it is applied using pointers and indirection.
 - inline function is a function that expanded in line when it is invoked.
+- inline is merely a request to a compiler not a command therefore compiler can ignore an inline function if its body is too long.
 - In the case of inline, the arguments are evaluated only once.Whereas in the case of macro, the arguments are evaluated every time whenever macro is used in the program.
 - macros do not have error checking while inline have error checking.
-** Function Overloading resolution :-**
+**Function Overloading resolution :-**
    - tries to find exact match.
    - If not found it uses integral promotion to actual args like float to double and char to int
    - when both fails it uses implicit conversion but if multplie matches arises then it gives an error messages
    - If all fails compiler will try the user defined conversions.
+   
+**Structures in c vs structures in c++**:-
+-  structures are user defined data type to group together the data type under a single place.
+
+| structures in c  | Structures in c++ |
+| ------------- | ------------- |
+| can't have member function  | Can have member function  |
+| data hiding not possible  | data hiding possible  |
+| can't initializes members | can initializes members |
+| can't have static members | can have static members |
+| empty structure has size 0 | empty structure has size 1 |
+| can't have constructors | can have constructurs |
+| use of struct keyword required to make a struct object | no need for struct keyword |
+| do not have access modifiers | have access modifiers |
+ 
+ 
+**Structures vs class in c++**
+| Structure | Class  |
+| --------- | ---------- |
+| By Default members are public | By default members are private |
+| Normally use for data grouping | Normally use for abstraction as well as inheritance |
+
+**Imp Note**:-
+- structures in c++ also support inheritance
  
 ### Chapter 5 Classes and Objects 
+- class doesn't create memory space for objects
+- Member function can be defined inside or outside of the class
+- outside will be like this 
+```
+returnTypes classname::functionname(args){}
+```
+- a normal function and a M.F has a difference that a M.F incorporates a membership 'identity label' in the header. This tell the compiler which class it belongs to 
+- When a member function is declared inside the class it is treated as an inline function.
+- calling of M.F inside another M.F is called nesting of M.F
+- An object can't invoke a private member function
+- array inside a clas can be used in situation like creating a shopping list.
+- when M.F declared inside class it is allocated some memory space.
+- when creates objects no seperate M.F space is allocated for independent object . only memory for member variables is assigned.
+- a static variable is a variable that maintains its value throughout the program
+- a static data member is that member whose only one copy is available to all the objects. only single value is created for the entire class.
+- Its lifetime is throughout the program.
+- initialized to zero when first object of class is created
+- static data member stored seperately
+- ```
+defining static member and initial value:-
+returntype classname::staticvariablename = initialvalue;
 
+```
+**static member function:-**
+- this function can access only other static members that is variable or function
+- can be declared like :-
+```
+static returntype functionanme(){}
+```
+- can be called using classname instead objects  like below:-
+```
+classname::functionname;
+```
+**Array of Objects**
+- it is the collection of objects of class type
 
+**Objects as function arguments**
+- can pass entire object or can pass the address of object
+
+**Friend function**
+- it has the ability to access private and protected member of the class given that this is not  a member function of the class.
+- a function declaration should be preceded with keyword friend.
+- Doesn't need scope resoultion operator
+**Features:-**
+  - Not in the scope of class
+  - no need to use an object to call this function
+  - can't use the member variables directly need to pass the object as arguments to access member variables.
+  - Can be declared in public or private area
+  - use case - can be used in funtion overloading
+  
+- A M.F can be a friend function in of another class like:-
+```
+class A{
+  public:
+     int fun();
+}
+class B{
+  public:
+  friend int A::fun();
+  
+
+}
+```
+**Friend Class:-**
+- when all the member function of one class is declared as friend funtion of another class then it is called as friend class.
+- code like this
+
+```
+class A{
+  friend class X;
+}
+```
+**Function friendly to two classes:-**
+-  In this a function can be friend to two classes so  that the function has access to both class's members
+- syntax
+```
+class ABC; //forward declaration as compiler needs to know that there is existence of some class ABC in beginning
+class XYZ{
+  public:
+       friend void max(XYZ,ABC); //  object of XYZ and ABC
+}
+class ABC{
+  public:
+       friend void max(XYZ,ABC); // object of XYZ and ABC
+}
+```
+
+**Pointers to member:-**
+- it is possible to take the address of a member of a class.
+- class member pointer ::* or pointer to member of a class.
+- syntax
+```
+datatype classname::* pointername = &classname::membername;
+```
+- let a is object of class
+```
+cout<<a.*ip; //same
+cout<<a.m // same
+
+ap = &a; // object reference assigned to a pointer
+cout<<ap->*ip; //display m
+cout<<ap->m; // same as above
+```
+- ->* is used when we access member when we use pointer to both the object and the member
+- .* is used when the object itself is used with a member pointer.
+- for M.F
+  - (object-name .* pointer-to-member function)(args);
+  - (pointer-to-object ->* pointer-to-member function)(args);
 
 
 
