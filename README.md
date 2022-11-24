@@ -195,7 +195,7 @@ returnTypes classname::functionname(args){}
 - Its lifetime is throughout the program.
 - initialized to zero when first object of class is created
 - static data member stored seperately
-- ```
+```
 defining static member and initial value:-
 returntype classname::staticvariablename = initialvalue;
 
