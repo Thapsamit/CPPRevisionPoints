@@ -293,4 +293,40 @@ cout<<ap->m; // same as above
 
 - constructor is special member function having the same name as that of class and used to initialize the objects at the time of creation.
 - **Special Characteristics:-**
-  - 
+- **Rules:-**
+  - cannot be virtual, cannot refer to their address.
+  - cannot be inherited, but accessible to subclass
+  - no return type
+- **Types**:
+  - **Parameterised constructor:-** = construtor having parameters.
+  - **Copy constructor:-** = copy constructor is constructor that initializes an object using other object of same class. When reference of the class is used in constructor arguments.
+  - **do-nothing constructor:-** = constructor with no body or no arguments it is just there to satisfy the compiler.
+  - **default constructor** = do not take any arguments 
+  - **default args constructor:-** = can take default args and when it called with no args it becomes default constructor 
+  - **IMP**:- A::A() and A::A(int x =0) will cause an ambiguity
+  ```
+  classname objectname = classname(0,100) // explicitly call
+  classname objectname(0,100); // implicit call
+  ```
+  - **IMP** -  parameter of constructor can be of any type except that of the class however reference can be passed
+  - **IMP** :-
+  ```
+  classname ob2(ob1) // copy constructor called
+  classname ob2 = ob1 // copy constructor called
+  classname ob2;
+  ob2 = ob1; // copy constructor not called as it is direct member by member assigning of values
+  ```
+  - **dynamic constructors:-** = allocation of memory to object at the time of their construction is known as dynamic construction of objects.
+- **Destructors:-**
+  - deallocates or destroys an objects
+  ```
+   ~classname(){}
+  ```
+  - never takes arguments and never returns anything
+  - compiler implicitly call destructor on program exit
+  - objects destroyed on reverse order of creation.
+  - destructor do not overload.
+  - **IMP:-** - when new operator is used in constructor to allocate memory then we need delete operator to delete the memory space
+  - can't be declared as static or const.
+  
+
