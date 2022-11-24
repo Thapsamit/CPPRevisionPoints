@@ -177,6 +177,7 @@ int &k = 7 // allowed
 - structures in c++ also support inheritance
  
 ### Chapter 5 Classes and Objects 
+
 - class doesn't create memory space for objects
 - Member function can be defined inside or outside of the class
 - outside will be like this 
@@ -288,3 +289,8 @@ cout<<ap->m; // same as above
 
 
 
+### Chapter 6 Constructors and destructors
+
+- constructor is special member function having the same name as that of class and used to initialize the objects at the time of creation.
+- **Special Characteristics:-**
+  - 
