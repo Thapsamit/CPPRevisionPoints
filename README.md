@@ -329,4 +329,198 @@ cout<<ap->m; // same as above
   - **IMP:-** - when new operator is used in constructor to allocate memory then we need delete operator to delete the memory space
   - can't be declared as static or const.
   
+# Chapter 8 Inheritance:-
+- Inheritance is mechanism of deriving the features of a class to a new class
+- **Types:-**
+  - Single:- derived class with one base class
+  - multiple:- derived class inherits from multiple classes
+  - Hierarichal:- many derived class derives from a single base class
+  - Multilevel:- derived from other derived class
+  - Hybrid:- Combination
+```c++
+class derived_classname : visibility_mode base_class_name{
+}
 
+```
+- default visibility is private
+- When inherit privately 'public members' of base class becomes private members of derived class and only accessible by M.F not by objects of derived class.
+- When inherit publicly 'public members' of base class becomes public members of derived class and accessibile to objects as well.
+- Private members not inheritable but accessible to M.F that is derived from base class.
+- #### What if base class and derived class both have same M.F?
+  - Derived class M.F supersedes the base class M.F but M.F of base class only be called when derived class do not redefine that M.F
+- #### What if private members need to be inherited?
+  - answer is use protected access specifier as it is accessible to its class and withing its immediate derived class as well.
+  - when derived in public mode the protected members goes into protected mode in derived class too and available for further inheritance.
+  - when derived in public mode the protected members goes into private mode in derived class and not available for further inheritance.
+  - when derived class uses protected mode the public and protected members of base class goes into protected mode of derived class.
+- #### What are various function that can access to private and protected members?
+  - A M.F of derived class
+  - A function that is friend of the class
+  - A M.F of class that is friend of the class
+
+- #### Multiple Inheritances:-
+  ```c++
+  class classname : visibilitymode class1, visibiltymode class2{}
+  ```
+  - **Ambiguity Resolution in Multiple inheritance:-**
+    - when two base classes have same function prototype then which function to call be derived class? basically we need to define a named instance within derived class using Scope resolution operator as like:
+    ```c++
+    class derived{
+    
+      public:
+         void display(){
+           M::display() // of which class need to be used
+         }
+    }
+    
+    ```
+    - When ambiguity arises in single inheritance:-
+    ```c++
+    objectnameofderivedclass.baseclassname::functionname()
+    ```
+- #### Virtual Base classes:-
+  - Sometimes duplicates set of members inherited because multiple paths are possible for same Members to be inherited  due to some type of inheritance and in order to avoid these we use virtual base classes
+  - we can make the direct or intermediate base classes as virtual that allows c++ to allow only one copy of that class is inherited regardless of how many oath exists.
+  ```c++
+  class A{}
+  class B : virtual public A{}
+  class C : public virtual A{}
+  class D : public B,public C{}
+  ```
+  
+- #### Abstract classes in c++:-
+  - Can't create objects
+  - it is used to provide a base upon which other classes maybe built and provide definition to functions.
+  - In C++ if a class has atleast one pure virtual function then it is termed as abstract class.
+- #### Constructors in derived class:-  
+  - If the base class has constructrs with arguments then it is mandatory for derived class to have constructor and pass the desired arguments to base class constructor.
+  - Base constructor execute first and then derived constructor
+  - In case of Multiple inheritance the order of base class constructor called based on the order they appear in the time of declaration of derived class.
+  - In Multilevel it depends on order of inheritance
+  ```c++
+  class derived:public base{
+    public:
+        derived(args1,args2):
+        base(args1)
+        {
+          //derived constructor
+        }
+  
+  }
+  ```
+  - Virtual base class construcor called before any non-virtual base classes
+
+- #### Containership:-
+  - containership is way that a class can contain objects of other classes as its members.
+  - It follows HAS-A relationship while inheritance IS-A 
+  - The object that is part of another object is called contained object, whereas object that contains another object as its part or attribute is called container object.
+  - creation of object that contains another object is different than creating independent object as independent one created using its constructor but in case of nested object it is created in two stages:
+    - first member objects that is contained are constructed using their respective container
+    - second the ordinary members are created of the class
+  which means constructor of contained object called first then own constructor is called later
+  
+  
+- ### containership vs Inheritance
+| containership | Inheritance |
+| ------------- | ----------- |
+| HAS-A relationship | IS-A relationship |
+| It enables a class to contain objects of different classes as its data member. | It enables a class to inherit data and functions from a base class |
+| The container class can’t override the functionality of the contained class. | The derived class may override the functionality of the base class. |
+| The container class can’t add anything to the contained class. | The derived class may add data or functions to the base class. |
+
+
+
+# Chapter 9 Pointers, virtual functions and polymorphism
+- The word polymorphism means having many forms. In simple words, we can define polymorphism as the ability of a message to be displayed in more than one form
+- compile time polymorphishm implemented using function overloading and operator overloading
+- run time polymorphism implmented using virtual functions.
+- ### Compile time vs Run Time polymorphishm:-
+| Compile Time Polymorphism | Run time Polymorphism |
+| ------------------------- | --------------------- |
+| In Compile time Polymorphism, the call is resolved by the compiler. | In Run time Polymorphism, the call is not resolved by the compiler. |
+| It provides fast execution because the method that needs to be executed is known early at the compile time. | It provides slow execution as compare to early binding because the method that needs to be executed is known at the runtime. |
+|  | At Run time when it is known what class objects are  |
+
+- pointer to function are used for dynamic binding and even based applications.It works as a base pointers to members
+- with function we can allow a c++ to select a function dynamically at run time.
+- we can also pass function as arguments using pointer.
+```c+++
+data_type (*functionname)(args);
+functionname ptr = &add;
+```
+- **Pointers to Objects:-**
+  ```c++
+  class item{}
+  item obj; // objects
+  item *ptr = &obj;
+  // Now can access the member function using two methods
+  obj.memf();// by object or dot operator
+  ptr->memf(); //by arrow or object pointer
+  (*ptr).memf(); //using indirection 
+  
+  ```
+- #### This pointer
+  - this pointer represent an object that refers to current object that is under consideration
+  - for example A.max() is called the this pointer will pointes to address of object a
+  - One applicatipon of this is to return an object that it points to or to distinguish between formal parameters and data memebrs if they have same name.
+  
+- #### Pointers to derived classes:-
+  - If we have a base class b and derived class d then a base pointer which is a pointer declared to b can also be a pointer to object of d .
+  ```
+  baseclass *ptr;
+  baseclass obj;
+  ptr = &obj;
+  ptr = &derivedobj; // can point to derived as well because this is object is derived from class B itself.
+  ```
+  **IMP:-** = We can only points to member that has been inherited from base class but not the member that is individual to derived.
+  - If Some member has same name as that of base member then it points to base class member only.
+  ```
+  ((DC*)bptr)->d = 400; // base pointer points to derived class personal members
+  ```
+  - A virtual function is a member function which is declared within a base class and is re-defined (overridden) by a derived class. When you refer to a derived class object using a pointer or a reference to the base class, you can call a virtual function for that object and execute the derived class’s version of the function. 
+  - We must access virtual function through use of pointer declared as a pointer to base class.
+  - Run time polymorphishm achived only when a virtual function is accessed through a pointer to base class.
+  - **Rules:**
+    - Must be member of some class
+    - cannnot be static members
+    - access using object pointer
+    - A virtual function in base class must be defined even though not used
+    - Prototype of virtual function should be identical to all derived versions.
+    - cann't have virtual constructors but can have virtual destructors.
+    - derived class pointer can't point to base class members
+    - if virtual function defined in base class it need not to be necessarialy to by redefined in the derived class
+- **Pure virtual function:-**
+  - when a virtual function in base class has no definition relative to base class and it need to be defined in derived class
+  ```c++
+  virtual void display()=0; // pure virtual function
+  ```
+  - class having pure virtual funtion becomes abstract and can't use to make object.
+ 
+# Chapter 9 Exception Handling:-
+- Exceptions are run time anamolies or unusual condition that breaks the normal flow of the program.
+- Probelms encounter while executing
+- Anamolies like division be zero,access array outside of its bounds, running out of memory
+- **synchronous:-** - Error such as out of range index and overflow are synchronous 
+- **Asynchronous:-** - The errors that are caused by events beyond the control of program like keyboard interrupts
+- try enclose statements that can occurs exception , catch catches the excpetions 
+- can enclose function inside try block taht can throw some exceptions
+- catch all exception 
+```c++
+catch(...){
+}
+``` 
+- Rethrow an Exception:-
+  - throw an exception from catch block that will be handled by  next enclosing try/catch block
+- **Specifying Exception:-**
+  - It is possible to restrict a function to throw only a specific type of exception
+  ```c++
+  type functionname(arg_list) throw(int,double);
+  ```
+  - if any other type is thrown it will cause an abnormal termination of program.
+
+
+
+  
+  
+  
+  
